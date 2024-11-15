@@ -1,11 +1,7 @@
 #CONTROLADORES
 #Este archivo meneja las rutas de Flask, llamando a funciones de consulta y pasando los resultados a templates.
 from flask import Flask, render_template
-
-
 app = Flask(__name__)
-if __name__ == "__main__":
-    app.run(debug=True)
 
 @app.route('/')
 def index():
@@ -41,4 +37,5 @@ def consulta_5():
     #return render_template('consulta_5.html',resultados=resultados)
     return render_template('consulta_5.html')
 
-
+if __name__ == "__main__":
+    app.run(debug=True)
