@@ -1,2 +1,1 @@
-#CONFIGURACIÒN
-#Configuraciòn de la base de datos y de la aplicaciòn
+#Incluye la configuración de la base de datos y otras configuraciones de Flask necesarias.

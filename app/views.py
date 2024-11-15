@@ -1,5 +1,5 @@
-#CONTROLADORES
-#Este archivo meneja las rutas de Flask, llamando a funciones de consulta y pasando los resultados a templates.
+# Define las rutas de la aplicación para cada consulta, llamando a las
+# funciones en queries.py y pasando los resultados a los templates.
 
 
 from flask import Flask, render_template, url_for
