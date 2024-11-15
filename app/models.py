@@ -1,15 +1,7 @@
 import enum
-from typing import List
-from typing import Optional
 from unittest.mock import Base
-
 from sqlalchemy import Column, ForeignKey
-from sqlalchemy import String,Enum,Float,Integer,Text,SmallInteger
-
-from sqlalchemy.orm import DeclarativeBase
-from sqlalchemy.orm import Mapped,MappedColumn
-
-from sqlalchemy.orm import relationship
+from sqlalchemy import Float,Integer,Text,SmallInteger
 
 #DEFINICION DE MODELOS
 #Aqui se define cada tabla de la base de datos como una clase en SQLAlchemy con las relaciones necesarias.
