@@ -6,6 +6,7 @@ from sqlalchemy import Float,Integer,Text,SmallInteger
 #DEFINICION DE MODELOS
 #Aqui se define cada tabla de la base de datos como una clase en SQLAlchemy con las relaciones necesarias.
 
+#Lista de Continentes
 class continentList(enum.Enum):
     'Asia'=1
     'Europe'=2
@@ -15,10 +16,12 @@ class continentList(enum.Enum):
     'Antarctica'=6
     'South America'=7
 
+#Lista de opciones de idioma oficial
 class isofficialList(enum.Enum):
     'F'=0
     'T'=1
 
+#Clase Country con sus relaciones
 class Country(Base):
     __tablename__ = "country"
 
@@ -38,6 +41,7 @@ class Country(Base):
     capital = Column(Integer)
     code2 = Column(Text(length=2))
 
+#Clase City con sus relaciones
 class City(Base):
     __tablename__ = "city"
 
@@ -47,6 +51,7 @@ class City(Base):
     district = Column(Text(length=20))
     population = Column(Integer)
 
+#Clase CountryLanguage con sus relaciones
 class CountryLanguage(Base):
     __tablename__ = "countryLanguage"
 
