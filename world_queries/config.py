@@ -7,5 +7,5 @@ global flaskAppName
 global debugMode
 
 #Global Variable Setup
-flaskAppName = '__name__'
+flaskAppName = ''
 debugMode = True

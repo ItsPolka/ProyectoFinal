@@ -1,16 +1,11 @@
 #CONTROLADORES
 #Este archivo meneja las rutas de Flask, llamando a funciones de consulta y pasando los resultados a templates.
-
-
 from flask import Flask, render_template
-import sys
-print(sys.path)
-from ..config import flaskAppName,debugMode
 
 
-app = Flask(flaskAppName)
-if flaskAppName == "__main__":
-    app.run(debug=debugMode)
+app = Flask(__name__)
+if __name__ == "__main__":
+    app.run(debug=True)
 
 @app.route('/')
 def index():
