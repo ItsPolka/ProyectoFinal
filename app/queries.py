@@ -1,6 +1,12 @@
 #LOGICA DE CONSULTAS
 #Este archivo contiene funciones para cada consulta compleja
 
+#VARIABLES Y FUNCIONES-----------------------------------------------------------------------------
+
+
+
+
+#CONSULTAS----------------------------------------------------------------------------------------
 #Consulta_1
 
 #Una ciudad en europa donde la población sea mayór a la media mundial (idea)
