@@ -23,6 +23,10 @@ class continentList(enum.Enum):
     'Antarctica'=6
     'South America'=7
 
+class isofficialList(enum.Enum):
+    'F'=0
+    'T'=1
+
 class Country(Base):
     __tablename__ = "country"
 
@@ -41,3 +45,19 @@ class Country(Base):
     headOfState = Column(Text(length=60))
     capital = Column(Integer)
     code2 = Column(Text(length=2))
+
+class City(Base):
+    __tablename__ = "city"
+
+    id = Column(Integer, primary_key=True)
+    name = Column(Text(length=35))
+    countryCode = Column(Text(length=3),ForeignKey("country.code"))
+    district = Column(Text(length=20))
+    population = Column(Integer)
+
+class CountryLanguage(Base):
+    __tablename__ = "countryLanguage"
+
+    countryCode = Column(Text(length=3), primary_key=True)
+    language = Column(Text(length=30), primary_key=True)
+    isOfficial = Column(enum(isofficialList))
