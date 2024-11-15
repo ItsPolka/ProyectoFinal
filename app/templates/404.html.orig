@@ -1,8 +1,0 @@
-{% extends './base.html' %} 
-    {% block title %} WORLD QUERIES {% endblock %} 
-    {% block content %}
-
-    <h2>
-        Opps pagina no encontrada
-    </h2>
-{% endblock %}
