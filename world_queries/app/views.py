@@ -1,6 +1,6 @@
 #VIEWS
 #Este archivo meneja las rutas de Flask, llamando a funciones de consulta y pasando los resultados a templates.
-from flask import Flask, render_template
+from flask import render_template
 from flask import Blueprint
 
 views = Blueprint('views', __name__)

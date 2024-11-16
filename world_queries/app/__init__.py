@@ -3,6 +3,7 @@
 from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 from .views import views
+from config import db
 
 
 def create_app():
@@ -14,7 +15,7 @@ def create_app():
     app.config["SQLALCHEMY_DATABASE_URI"] = 'mysql://root:@localhost/world'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     
-    SQLAlchemy(app)
+    db.init_app(app)
     
     
     # SQLAlchemy(app)
