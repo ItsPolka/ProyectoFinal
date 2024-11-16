@@ -1,10 +1,11 @@
- <!-- extends "base.html" 
- block title 
-Consulta 4
- endblock 
-
- block content 
-    <h3>
-        Consulta 4
-    </h3>
- endblock   -->
+{% extends './decorated_base.html' %} 
+    {% block datatext %}
+    <div class="container-fluid text-center my-5">
+        <h2 class="color1">Consulta 4</h2>
+        <div class="container-lg text-justify py-5 fw-light">
+            <p>
+                Consulta 4 Texto y Querries
+            </p>
+        </div>
+    </div>
+    {% endblock %}

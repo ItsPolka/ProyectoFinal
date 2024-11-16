@@ -1,0 +1,21 @@
+{% extends './decorated_base.html' %} 
+    {% block datatext %}
+    <div class="container-fluid text-center my-5">
+        <h2 class="color1">Descipción del proyecto</h2>
+        <div class="container-lg text-justify py-5 fw-light">
+            <p>
+                El proyecto consiste en desarrollar una aplicación web utilizando el framework Flask que permita realizar consultas avanzadas a la base de datos World de MySQL. Esta base de datos está compuesta por las tablas country, city y countrylanguage, las cuales están interrelacionadas mediante claves foráneas.
+            </p>
+            <p> 
+                La aplicación será diseñada siguiendo el patrón de arquitectura Modelo-Vista-Controlador (MVC), lo que garantiza una separación clara entre la lógica de negocio, la presentación y el acceso a los datos. Además, se empleará SQLAlchemy para modelar las tablas, gestionar las relaciones y realizar las consultas necesarias. Los resultados de estas consultas se presentarán en el navegador utilizando plantillas dinámicas generadas con Jinja2.
+            </p>
+            <p>
+                El objetivo principal es implementar cinco consultas complejas que combinen datos de las tablas mencionadas y brindar una interfaz intuitiva que permita al usuario interactuar con dichas consultas.
+            </p>
+            <p>
+                Este proyecto busca desarrollar habilidades prácticas en diseño de bases de datos, implementación de aplicaciones web y organización del código bajo estándares profesionales.
+            </p>
+        </div>
+    </div>
+    {% endblock %}
+
