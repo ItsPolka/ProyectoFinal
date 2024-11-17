@@ -2,6 +2,7 @@
 #Este archivo meneja las rutas de Flask, llamando a funciones de consulta y pasando los resultados a templates.
 from flask import render_template
 from flask import Blueprint
+from .queries import cons1
 
 views = Blueprint('views', __name__)
 
@@ -23,6 +24,9 @@ def about():
 @views.route('/1')  
 # Decorador para definir la ruta consulta1
 def c1():
+
+    processed_text = cons1()
+
     # Renderiza el template 'index.html'
     return render_template('consulta_1.html')
 

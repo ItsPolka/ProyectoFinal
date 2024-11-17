@@ -2,6 +2,9 @@
 #Este archivo contiene funciones para cada consulta compleja
 
 #VARIABLES Y FUNCIONES-----------------------------------------------------------------------------
+from sqlalchemy import select
+from .models import Country,City
+from sqlalchemy.sql import func
 
 
 
@@ -16,6 +19,13 @@
 #   }else{print "no existe"}
 #}
 
+
+def cons1():
+    return (
+        select(City.Population,City.Name)
+        .select_from(City)
+        .where(Country.Continent=="Europe",City.CountryCode==Country.Code,City.Population>func.avg(City.Population))
+    )
 
 #Consulta_2
 

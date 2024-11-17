@@ -1,6 +1,6 @@
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import relationship
-from ..config import db
+from config import db
 
 class Country(db.Model):
     __tablename__ = 'country'
