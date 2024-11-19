@@ -7,10 +7,25 @@
                 Consulta 1 Texto y Querries
             </p>
             <p>
-                Una ciudad en europa donde la población sea mayór a la media mundial
-            </p>
-            <p>
-                {{ processed_text }}
+                <h3>Ciudades en europa donde la población sea mayór a la media mundial</h3>
+                <table border="1">
+                    <thead>
+                        <tr>
+                            <th>City</th>
+                            <th>Country</th>
+                            <th>Population</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for row in results %}
+                            <tr>
+                                <td>{{ row.city }}</td>
+                                <td>{{ row.country }}</td>
+                                <td>{{ row.population }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
             </p>
 
         </div>

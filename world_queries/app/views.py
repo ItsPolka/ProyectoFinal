@@ -4,6 +4,7 @@ from flask import render_template
 from flask import Blueprint
 from .queries import cons1
 
+
 views = Blueprint('views', __name__)
 
 # Define la ruta de inicio
@@ -25,7 +26,9 @@ def about():
 # Decorador para definir la ruta consulta1
 def c1():
     # Renderiza el template 'index.html'
-    return render_template('consulta_1.html',processed_text = cons1())
+    data = cons1() 
+    print (data)
+    return render_template('consulta_1.html',results = data)
 
 # Define la ruta de consulta2
 @views.route('/2')  

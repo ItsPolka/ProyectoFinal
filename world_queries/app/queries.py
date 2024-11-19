@@ -4,7 +4,7 @@
 #VARIABLES Y FUNCIONES-----------------------------------------------------------------------------
 from .models import Country,City
 from sqlalchemy.sql import select, func, and_
-
+from config import db
 
 
 
@@ -24,8 +24,8 @@ def cons1():
     avg_population_subquery = select(func.avg(City.Population)).scalar_subquery()
     
     # Main query
-    return (
-        select(City.Population, City.Name)
+    query = (
+        select(City.Name, Country.Name.label("Country"), City.Population)  # Retrieve City name, Country name, and Population
         .join(Country, City.CountryCode == Country.Code)  # Explicit join condition
         .where(
             and_(
@@ -34,6 +34,21 @@ def cons1():
             )
         )
     )
+    
+    # Execute the query
+    with db.session() as session:
+        results = session.execute(query).all()
+
+    # Format the results for HTML rendering
+    formatted_results = [
+        {
+            "city": row.Name,
+            "country": row.Country,
+            "population": row.Population
+        }
+        for row in results
+    ]
+    return formatted_results
 #Consulta_2
 
 #El nombre del presidente del pais con una lengua hablada por al menos el 50% de la población (idea)
