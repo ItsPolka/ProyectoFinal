@@ -24,11 +24,8 @@ def about():
 @views.route('/1')  
 # Decorador para definir la ruta consulta1
 def c1():
-
-    processed_text = cons1()
-
     # Renderiza el template 'index.html'
-    return render_template('consulta_1.html')
+    return render_template('consulta_1.html',processed_text = cons1())
 
 # Define la ruta de consulta2
 @views.route('/2')  

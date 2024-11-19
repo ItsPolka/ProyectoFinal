@@ -2,9 +2,8 @@
 #Este archivo contiene funciones para cada consulta compleja
 
 #VARIABLES Y FUNCIONES-----------------------------------------------------------------------------
-from sqlalchemy import select
 from .models import Country,City
-from sqlalchemy.sql import func
+from sqlalchemy.sql import select, func, and_
 
 
 
@@ -21,12 +20,20 @@ from sqlalchemy.sql import func
 
 
 def cons1():
+    # Subquery to calculate the average population
+    avg_population_subquery = select(func.avg(City.Population)).scalar_subquery()
+    
+    # Main query
     return (
-        select(City.Population,City.Name)
-        .select_from(City)
-        .where(Country.Continent=="Europe",City.CountryCode==Country.Code,City.Population>func.avg(City.Population))
+        select(City.Population, City.Name)
+        .join(Country, City.CountryCode == Country.Code)  # Explicit join condition
+        .where(
+            and_(
+                Country.Continent == "Europe",         # Filter for European countries
+                City.Population > avg_population_subquery  # Population greater than the average
+            )
+        )
     )
-
 #Consulta_2
 
 #El nombre del presidente del pais con una lengua hablada por al menos el 50% de la población (idea)
