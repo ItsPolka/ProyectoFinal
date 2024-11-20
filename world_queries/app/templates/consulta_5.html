@@ -1,13 +1,57 @@
 {% extends './decorated_base.html' %} 
+<style>
+    /* Center the table in the container */
+    .table-container {
+      width: 80%; /* Adjust width as needed */
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #f9f9f9;
+      border-radius: 8px;
+    }
+  
+    /* Style the table */
+    table {
+      width: 100%;
+      border-collapse: collapse; /* Merge borders between cells */
+      font-family: 'Arial', sans-serif; /* Use a clean font */
+      border: 1px solid #ddd;
+    }
+  </style>
+
     {% block datatext %}
     <div class="container-fluid text-center my-5">
         <h2 class="color1">Consulta 5</h2>
         <div class="container-lg text-justify py-5 fw-light">
             <p>
-                Consulta 5 Texto y Querries
+                Consulta 5
             </p>
+        </div>
+        <div , style="text-align: center;">
             <p>
-                Tipo de gobierno de países africanos con gnp mayor al promedio del continente
+                <h4>Tipo de gobierno de países africanos con gnp mayor al promedio del continente</h4>
+                
+            </p>
+        </div>
+        <div , class="table-container">
+            <p>
+                <table , class="table">
+                    <thead>
+                        <tr>
+                            <th>City</th>
+                            <th>Country</th>
+                            <th>Population</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for row in results %}
+                            <tr>
+                                <td>{{ row.city }}</td>
+                                <td>{{ row.country }}</td>
+                                <td>{{ row.population }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
             </p>
         </div>
     </div>

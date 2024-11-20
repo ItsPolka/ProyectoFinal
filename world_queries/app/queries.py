@@ -58,6 +58,36 @@ def cons1():
 #   }else{print "no existe"}
 #}
 
+def cons2():
+    # Subquery to calculate the average population
+    avg_population_subquery = select(func.avg(City.Population)).scalar_subquery()
+    
+    # Main query
+    query = (
+        select(City.Name, Country.Name.label("Country"), City.Population)  # Retrieve City name, Country name, and Population
+        .join(Country, City.CountryCode == Country.Code)  # Explicit join condition
+        .where(
+            and_(
+                Country.Continent == "Europe",         # Filter for European countries
+                City.Population > avg_population_subquery  # Population greater than the average
+            )
+        )
+    )
+    
+    # Execute the query
+    with db.session() as session:
+        results = session.execute(query).all()
+
+    # Format the results for HTML rendering
+    formatted_results = [
+        {
+            "city": row.Name,
+            "country": row.Country,
+            "population": row.Population
+        }
+        for row in results
+    ]
+    return formatted_results
 
 
 #Consulta_3
@@ -68,6 +98,37 @@ def cons1():
 #   }else{print "no existe"}
 #}
 
+def cons3():
+    # Subquery to calculate the average population
+    avg_population_subquery = select(func.avg(City.Population)).scalar_subquery()
+    
+    # Main query
+    query = (
+        select(City.Name, Country.Name.label("Country"), City.Population)  # Retrieve City name, Country name, and Population
+        .join(Country, City.CountryCode == Country.Code)  # Explicit join condition
+        .where(
+            and_(
+                Country.Continent == "Europe",         # Filter for European countries
+                City.Population > avg_population_subquery  # Population greater than the average
+            )
+        )
+    )
+    
+    # Execute the query
+    with db.session() as session:
+        results = session.execute(query).all()
+
+    # Format the results for HTML rendering
+    formatted_results = [
+        {
+            "city": row.Name,
+            "country": row.Country,
+            "population": row.Population
+        }
+        for row in results
+    ]
+    return formatted_results
+
 #Consulta_4
 #El idioma mas hablado del paìs de la ciudad con menor población(idea)
 #for country{
@@ -76,6 +137,37 @@ def cons1():
 #   }else{print "no existe"}
 #}
 
+def cons4():
+    # Subquery to calculate the average population
+    avg_population_subquery = select(func.avg(City.Population)).scalar_subquery()
+    
+    # Main query
+    query = (
+        select(City.Name, Country.Name.label("Country"), City.Population)  # Retrieve City name, Country name, and Population
+        .join(Country, City.CountryCode == Country.Code)  # Explicit join condition
+        .where(
+            and_(
+                Country.Continent == "Europe",         # Filter for European countries
+                City.Population > avg_population_subquery  # Population greater than the average
+            )
+        )
+    )
+    
+    # Execute the query
+    with db.session() as session:
+        results = session.execute(query).all()
+
+    # Format the results for HTML rendering
+    formatted_results = [
+        {
+            "city": row.Name,
+            "country": row.Country,
+            "population": row.Population
+        }
+        for row in results
+    ]
+    return formatted_results
+
 #Consulta_5
 #Tipo de gobierno de países africanos con gnp mayor al promedio del continente(idea)
 #for country{
@@ -83,3 +175,34 @@ def cons1():
 #       print getCountry.GovernmentForm(country)
 #   }else{print "no existe"}
 #}
+
+def cons5():
+    # Subquery to calculate the average population
+    avg_population_subquery = select(func.avg(City.Population)).scalar_subquery()
+    
+    # Main query
+    query = (
+        select(City.Name, Country.Name.label("Country"), City.Population)  # Retrieve City name, Country name, and Population
+        .join(Country, City.CountryCode == Country.Code)  # Explicit join condition
+        .where(
+            and_(
+                Country.Continent == "Europe",         # Filter for European countries
+                City.Population > avg_population_subquery  # Population greater than the average
+            )
+        )
+    )
+    
+    # Execute the query
+    with db.session() as session:
+        results = session.execute(query).all()
+
+    # Format the results for HTML rendering
+    formatted_results = [
+        {
+            "city": row.Name,
+            "country": row.Country,
+            "population": row.Population
+        }
+        for row in results
+    ]
+    return formatted_results
