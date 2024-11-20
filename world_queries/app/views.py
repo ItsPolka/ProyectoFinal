@@ -40,7 +40,7 @@ def c1():
     #Importa datos y los ordena
     data = cons1()
     sort_by = request.args.get('sort_by','population')
-    sort_order = request.args.get('sort_order', 'asc')
+    sort_order = request.args.get('sort_order', 'desc')
     reverse = True if sort_order == 'desc' else False
 
     #Intenta ordenar los datos
@@ -56,13 +56,25 @@ def c1():
 
 
 # Define la ruta de consulta2
-@views.route('/2')  
+@views.route('/2',methods=['GET'])  
 # Decorador para definir la ruta consulta2
 def c2():
-    # Renderiza
-    data = cons2() 
-    print (data)
-    return render_template('consulta_2.html',results = data)
+    #Importa datos y los ordena
+    data = cons2()
+    sort_by = request.args.get('sort_by','Percentage')
+    sort_order = request.args.get('sort_order', 'desc')
+    reverse = True if sort_order == 'desc' else False
+
+    #Intenta ordenar los datos
+    try:
+        sorted_data = sorted(data, key=lambda x: get_nested_value(x,sort_by), reverse=reverse)
+    except Exception as e:
+        print(f"Error during sorting: {e}")
+        sorted_data = data 
+
+    print(sorted_data)
+    # Renderiza el template con datos ordenados
+    return render_template('consulta_2.html', results=sorted_data)
 
 # Define la ruta de consulta3
 @views.route('/3')  

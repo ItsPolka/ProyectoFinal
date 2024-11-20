@@ -21,11 +21,6 @@
     {% block datatext %}
     <div class="container-fluid text-center my-5">
         <h2 class="color1">Consulta 2</h2>
-        <div class="container-lg text-justify py-5 fw-light">
-            <p>
-                Consulta 2
-            </p>
-        </div>
         <div , style="text-align: center;">
             <p>
                 <h4>El nombre del presidente del pais con una lengua hablada por al menos el 50% de la población</h4>
@@ -34,20 +29,37 @@
         </div>
         <div , class="table-container">
             <p>
+                <form method="GET" action="/2">
+                    <label for="sort_by">Sort by:</label>
+                        <select name="sort_by" id="sort_by">
+                            <option value="HeadOfState" {% if request.args.get('sort_by', 'Percentage') == 'HeadOfState' %}selected{% endif %}>Head Of State</option>
+                            <option value="Language" {% if request.args.get('sort_by', 'Percentage') == 'Language' %}selected{% endif %}>Language</option>
+                            <option value="Percentage" {% if request.args.get('sort_by', 'Percentage') == 'Percentage' %}selected{% endif %}>Percentage</option>
+                        </select>
+        
+                    <label for="sort_order">Order:</label>
+                        <select name="sort_order" id="sort_order">
+                             <option value="asc" {% if request.args.get('sort_order','desc') == 'asc' %}selected{% endif %}>Ascending</option>
+                             <option value="desc" {% if request.args.get('sort_order','desc') == 'desc' %}selected{% endif %}>Descending</option>
+                        </select>
+                
+                    <button type="submit">Sort</button>
+                </form>
+
                 <table , class="table">
                     <thead>
                         <tr>
-                            <th>City</th>
-                            <th>Country</th>
-                            <th>Population</th>
+                            <th>Head Of State</th>
+                            <th>Language</th>
+                            <th>Percentage</th>
                         </tr>
                     </thead>
                     <tbody>
                         {% for row in results %}
                             <tr>
-                                <td>{{ row.city }}</td>
-                                <td>{{ row.country }}</td>
-                                <td>{{ row.population }}</td>
+                                <td>{{ row.HeadOfState}}</td>
+                                <td>{{ row.Language }}</td>
+                                <td>{{ row.Percentage }}</td>
                             </tr>
                         {% endfor %}
                     </tbody>

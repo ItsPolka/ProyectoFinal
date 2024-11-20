@@ -2,7 +2,7 @@
 #Este archivo contiene funciones para cada consulta compleja
 
 #VARIABLES Y FUNCIONES-----------------------------------------------------------------------------
-from .models import Country,City
+from .models import Country,City,CountryLanguage
 from sqlalchemy.sql import select, func, and_
 from config import db
 
@@ -25,12 +25,12 @@ def cons1():
     
     # Main query
     query = (
-        select(City.Name, Country.Name.label("Country"), City.Population)  # Retrieve City name, Country name, and Population
-        .join(Country, City.CountryCode == Country.Code)  # Explicit join condition
+        select(City.Name, Country.Name.label("Country"), City.Population)
+        .join(Country, City.CountryCode == Country.Code)
         .where(
             and_(
-                Country.Continent == "Europe",         # Filter for European countries
-                City.Population > avg_population_subquery  # Population greater than the average
+                Country.Continent == "Europe",
+                City.Population > avg_population_subquery
             )
         )
     )
@@ -60,18 +60,14 @@ def cons1():
 
 def cons2():
     # Subquery to calculate the average population
-    avg_population_subquery = select(func.avg(City.Population)).scalar_subquery()
+    porcentage_subquery = select(Country.Code).join(CountryLanguage, Country.Code == CountryLanguage.CountryCode).where(CountryLanguage.Percentage > 50.0).alias("subquery")
+
     
     # Main query
     query = (
-        select(City.Name, Country.Name.label("Country"), City.Population)  # Retrieve City name, Country name, and Population
-        .join(Country, City.CountryCode == Country.Code)  # Explicit join condition
-        .where(
-            and_(
-                Country.Continent == "Europe",         # Filter for European countries
-                City.Population > avg_population_subquery  # Population greater than the average
-            )
-        )
+        select(Country.HeadOfState, CountryLanguage.Language,CountryLanguage.Percentage)
+        .join(CountryLanguage, Country.Code == CountryLanguage.CountryCode)
+        .where(CountryLanguage.CountryCode.in_(porcentage_subquery))
     )
     
     # Execute the query
@@ -81,9 +77,9 @@ def cons2():
     # Format the results for HTML rendering
     formatted_results = [
         {
-            "city": row.Name,
-            "country": row.Country,
-            "population": row.Population
+            "HeadOfState": row.HeadOfState,
+            "Language": row.Language,
+            "Percentage": row.Percentage
         }
         for row in results
     ]
