@@ -21,14 +21,9 @@
     {% block datatext %}
     <div class="container-fluid text-center my-5">
         <h2 class="color1">Consulta 3</h2>
-        <div class="container-lg text-justify py-5 fw-light">
-            <p>
-                Consulta 3
-            </p>
-        </div>
         <div , style="text-align: center;">
             <p>
-                <h4>La capital del país con la densidad poblacional mas baja que el promedio de los tiene gnp mayór al promedio mundial</h4>
+                <h4>La capital del país con densidad poblacional mas baja que el promedio de los tiene gnp mayór al promedio mundial </h4>
                 
             </p>
         </div>
@@ -36,17 +31,17 @@
             <p>
                 <form method="GET" action="/3">
                     <label for="sort_by">Sort by:</label>
-                    <select name="sort_by" id="sort_by">
-                        <option value="city">City</option>
-                        <option value="country">Country</option>
-                        <option value="population">Population</option>
-                    </select>
-                
+                        <select name="sort_by" id="sort_by">
+                            <option value="city" {% if request.args.get('sort_by', 'pdensity') == 'city' %}selected{% endif %}>City</option>
+                            <option value="country" {% if request.args.get('sort_by', 'pdensity') == 'country' %}selected{% endif %}>Country</option>
+                            <option value="pdensity" {% if request.args.get('sort_by', 'pdensity') == 'pdensity' %}selected{% endif %}>Population Density</option>
+                        </select>
+        
                     <label for="sort_order">Order:</label>
-                    <select name="sort_order" id="sort_order">
-                        <option value="asc">Ascending</option>
-                        <option value="desc">Descending</option>
-                    </select>
+                        <select name="sort_order" id="sort_order">
+                             <option value="asc" {% if request.args.get('sort_order','desc') == 'asc' %}selected{% endif %}>Ascending</option>
+                             <option value="desc" {% if request.args.get('sort_order','desc') == 'desc' %}selected{% endif %}>Descending</option>
+                        </select>
                 
                     <button type="submit">Sort</button>
                 </form>
@@ -56,7 +51,7 @@
                         <tr>
                             <th>City</th>
                             <th>Country</th>
-                            <th>Population</th>
+                            <th>Population Density (P/km²)</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -64,7 +59,7 @@
                             <tr>
                                 <td>{{ row.city }}</td>
                                 <td>{{ row.country }}</td>
-                                <td>{{ row.population }}</td>
+                                <td>{{ row.pdensity or 'N/A'}}</td>
                             </tr>
                         {% endfor %}
                     </tbody>

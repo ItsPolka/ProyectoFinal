@@ -87,7 +87,7 @@ def cons2():
 
 
 #Consulta_3
-#La capital del país con la (densidad poblacional) mas baja que el promedio de los tiene gnp mayór al promedio mundial (idea)
+#La capital del país con densidad poblacional mas baja que el promedio de los tiene gnp mayór al promedio mundial (idea)
 #for country{
 #   if (getCountry.Population(country)/getCountry.SurfaceArea(country))< (detMedia.country.dencity(all))AND(detMedia.country.gnp(all)){
 #       print getCountry.Capital(country)
@@ -95,18 +95,29 @@ def cons2():
 #}
 
 def cons3():
-    # Subquery to calculate the average population
-    avg_population_subquery = select(func.avg(City.Population)).scalar_subquery()
+    # Subquery to calculate the average GNP
+    average_subquery = select(func.avg(Country.GNP)).scalar_subquery()
+    
+    # Subquery to calculate the average population density for countries with GNP > average GNP
+    density_subquery = (
+        select(func.avg(Country.Population / func.nullif(Country.SurfaceArea, 0)))
+        .where(Country.GNP > average_subquery)
+        .scalar_subquery()
+    )
     
     # Main query
     query = (
-        select(City.Name, Country.Name.label("Country"), City.Population)  # Retrieve City name, Country name, and Population
-        .join(Country, City.CountryCode == Country.Code)  # Explicit join condition
+        select(
+            City.Name.label("city"),
+            Country.Name.label("country"),
+            (Country.Population / func.nullif(Country.SurfaceArea, 0)).label("pDensity")
+        )
+        .join(Country, City.CountryCode == Country.Code)
         .where(
             and_(
-                Country.Continent == "Europe",         # Filter for European countries
-                City.Population > avg_population_subquery  # Population greater than the average
-            )
+                (Country.Population / func.nullif(Country.SurfaceArea, 0)) > density_subquery ,# Compare population density
+                (City.ID==Country.Capital)
+            )  
         )
     )
     
@@ -117,13 +128,14 @@ def cons3():
     # Format the results for HTML rendering
     formatted_results = [
         {
-            "city": row.Name,
-            "country": row.Country,
-            "population": row.Population
+            "city": row.city,
+            "country": row.country,
+            "pdensity": round(row.pDensity, 2) if row.pDensity else "N/A"
         }
         for row in results
     ]
     return formatted_results
+
 
 #Consulta_4
 #El idioma mas hablado del paìs de la ciudad con menor población(idea)
