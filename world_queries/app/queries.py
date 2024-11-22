@@ -59,15 +59,11 @@ def cons1():
 #}
 
 def cons2():
-    # Subquery to calculate the average population
-    porcentage_subquery = select(Country.Code).join(CountryLanguage, Country.Code == CountryLanguage.CountryCode).where(CountryLanguage.Percentage > 50.0).alias("subquery")
-
-    
     # Main query
     query = (
         select(Country.HeadOfState, CountryLanguage.Language,CountryLanguage.Percentage)
         .join(CountryLanguage, Country.Code == CountryLanguage.CountryCode)
-        .where(CountryLanguage.CountryCode.in_(porcentage_subquery))
+        .where(CountryLanguage.Percentage > 50.0)
     )
     
     # Execute the query
