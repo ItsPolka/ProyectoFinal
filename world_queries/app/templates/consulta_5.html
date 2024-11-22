@@ -18,58 +18,52 @@
     }
   </style>
 
-    {% block datatext %}
-    <div class="container-fluid text-center my-5">
-        <h2 class="color1">Consulta 5</h2>
-        <div class="container-lg text-justify py-5 fw-light">
-            <p>
-                Consulta 5
-            </p>
-        </div>
-        <div , style="text-align: center;">
-            <p>
-                <h4>Tipo de gobierno de países africanos con gnp menor al promedio del continente</h4>
-                
-            </p>
-        </div>
-        <div , class="table-container">
-            <p>
-                <form method="GET" action="/5">
-                    <label for="sort_by">Sort by:</label>
-                    <select name="sort_by" id="sort_by">
-                        <option value="city">City</option>
-                        <option value="country">Country</option>
-                        <option value="population">Population</option>
-                    </select>
-                
-                    <label for="sort_order">Order:</label>
-                    <select name="sort_order" id="sort_order">
-                        <option value="asc">Ascending</option>
-                        <option value="desc">Descending</option>
-                    </select>
-                
-                    <button type="submit">Sort</button>
-                </form>
-
-                <table , class="table">
-                    <thead>
-                        <tr>
-                            <th>City</th>
-                            <th>Country</th>
-                            <th>Population</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for row in results %}
-                            <tr>
-                                <td>{{ row.city }}</td>
-                                <td>{{ row.country }}</td>
-                                <td>{{ row.population }}</td>
-                            </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </p>
-        </div>
+{% block datatext %}
+<div class="container-fluid text-center my-5">
+    <h2 class="color1">Consulta 5</h2>
+    <div , style="text-align: center;">
+        <p>
+            <h4>Tipo de gobierno de países africanos con gnp mayor al promedio del continente</h4>
+        </p>
     </div>
-    {% endblock %}
+    <div , class="table-container">
+        <p>
+            <form method="GET" action="/5">
+                <label for="sort_by">Sort by:</label>
+                    <select name="sort_by" id="sort_by">
+                        <option value="governmentform" {% if request.args.get('sort_by', 'gnp') == 'GovernmentForm' %}selected{% endif %}>GovernmentForm</option>
+                        <option value="name" {% if request.args.get('sort_by', 'gnp') == 'Name' %}selected{% endif %}>Name</option>
+                        <option value="gnp" {% if request.args.get('sort_by', 'gnp') == 'GNP' %}selected{% endif %}>GNP</option>
+                    </select>
+    
+                <label for="sort_order">Order:</label>
+                    <select name="sort_order" id="sort_order">
+                         <option value="asc" {% if request.args.get('sort_order','desc') == 'asc' %}selected{% endif %}>Ascending</option>
+                         <option value="desc" {% if request.args.get('sort_order','desc') == 'desc' %}selected{% endif %}>Descending</option>
+                    </select>
+            
+                <button type="submit">Sort</button>
+            </form>
+
+            <table , class="table">
+                <thead>
+                    <tr>
+                        <th>Government Form</th>
+                        <th>Name</th>
+                        <th>GNP</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in results %}
+                        <tr>
+                            <td>{{ row.governmentform }}</td>
+                            <td>{{ row.name }}</td>
+                            <td>{{ row.gnp }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </p>
+    </div>
+</div>
+{% endblock %}

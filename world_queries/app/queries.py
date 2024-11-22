@@ -188,16 +188,15 @@ def cons4():
 
 def cons5():
     # Subquery to calculate the average population
-    avg_population_subquery = select(func.avg(City.Population)).scalar_subquery()
+    avg_gnp_subquery = select(func.avg(Country.GNP)).where(Country.Continent=="Africa").scalar_subquery()
     
     # Main query
     query = (
-        select(City.Name, Country.Name.label("Country"), City.Population)  # Retrieve City name, Country name, and Population
-        .join(Country, City.CountryCode == Country.Code)  # Explicit join condition
+        select(Country.GovernmentForm.label("governmentform"),Country.Name.label("name"),Country.GNP.label("gnp"))  # Retrieve City name, Country name, and Population
         .where(
             and_(
-                Country.Continent == "Europe",         # Filter for European countries
-                City.Population > avg_population_subquery  # Population greater than the average
+                Country.Continent == "Africa", # Filter for African countries
+                Country.GNP > avg_gnp_subquery  # Population greater than the average
             )
         )
     )
@@ -209,9 +208,9 @@ def cons5():
     # Format the results for HTML rendering
     formatted_results = [
         {
-            "city": row.Name,
-            "country": row.Country,
-            "population": row.Population
+            "governmentform": row.governmentform,
+            "name": row.name,
+            "gnp": row.gnp
         }
         for row in results
     ]
