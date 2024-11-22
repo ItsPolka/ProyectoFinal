@@ -21,32 +21,28 @@
     {% block datatext %}
     <div class="container-fluid text-center my-5">
         <h2 class="color1">Consulta 4</h2>
-        <div class="container-lg text-justify py-5 fw-light">
-            <p>
-                Consulta 4
-            </p>
-        </div>
         <div , style="text-align: center;">
             <p>
-                <h4>El idioma mas hablado del paìs de la ciudad con menor población</h4>
-                
+                <h4>El idioma menos hablado de los paìses de las ciudades con menor población </h4>
             </p>
         </div>
         <div , class="table-container">
             <p>
                 <form method="GET" action="/4">
                     <label for="sort_by">Sort by:</label>
-                    <select name="sort_by" id="sort_by">
-                        <option value="city">City</option>
-                        <option value="country">Country</option>
-                        <option value="population">Population</option>
-                    </select>
-                
+                        <select name="sort_by" id="sort_by">
+                            <option value="languagepercentage" {% if request.args.get('sort_by', 'population') == 'LanguagePercentage' %}selected{% endif %}>LanguagePercentage</option>
+                            <option value="countrylanguage" {% if request.args.get('sort_by', 'population') == 'CountryLanguage' %}selected{% endif %}>CountryLanguage</option>
+                            <option value="city" {% if request.args.get('sort_by', 'population') == 'City' %}selected{% endif %}>City</option>
+                            <option value="country" {% if request.args.get('sort_by', 'population') == 'Country' %}selected{% endif %}>Country</option>
+                            <option value="population" {% if request.args.get('sort_by', 'population') == 'Population' %}selected{% endif %}>Population</option>
+                        </select>
+        
                     <label for="sort_order">Order:</label>
-                    <select name="sort_order" id="sort_order">
-                        <option value="asc">Ascending</option>
-                        <option value="desc">Descending</option>
-                    </select>
+                        <select name="sort_order" id="sort_order">
+                             <option value="asc" {% if request.args.get('sort_order','asc') == 'asc' %}selected{% endif %}>Ascending</option>
+                             <option value="desc" {% if request.args.get('sort_order','asc') == 'desc' %}selected{% endif %}>Descending</option>
+                        </select>
                 
                     <button type="submit">Sort</button>
                 </form>
@@ -54,6 +50,8 @@
                 <table , class="table">
                     <thead>
                         <tr>
+                            <th>Language Percentage</th>
+                            <th>Country Language</th>
                             <th>City</th>
                             <th>Country</th>
                             <th>Population</th>
@@ -62,6 +60,8 @@
                     <tbody>
                         {% for row in results %}
                             <tr>
+                                <td>{{ row.languagepercentage }}</td>
+                                <td>{{ row.countrylanguage }}</td>
                                 <td>{{ row.city }}</td>
                                 <td>{{ row.country }}</td>
                                 <td>{{ row.population }}</td>

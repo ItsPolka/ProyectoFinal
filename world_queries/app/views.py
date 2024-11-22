@@ -101,10 +101,23 @@ def c3():
 @views.route('/4')  
 # Decorador para definir la ruta consulta4
 def c4():
-    # Renderiza
-    data = cons4() 
-    print (data)
-    return render_template('consulta_4.html',results = data)
+    #Importa datos y los ordena
+    data = cons4()
+    sort_by = request.args.get('sort_by','population')
+    sort_order = request.args.get('sort_order', 'asc')
+    reverse = True if sort_order == 'desc' else False
+
+    #Intenta ordenar los datos
+    try:
+        sorted_data = sorted(data, key=lambda x: get_nested_value(x,sort_by), reverse=reverse)
+    except Exception as e:
+        print(f"Error during sorting: {e}")
+        sorted_data = data 
+
+    print(sorted_data)
+    # Renderiza el template con datos ordenados
+    return render_template('consulta_4.html', results=sorted_data)
+
 
 # Define la ruta de consulta5
 @views.route('/5')  

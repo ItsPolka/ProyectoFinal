@@ -138,7 +138,7 @@ def cons3():
 
 
 #Consulta_4
-#El idioma mas hablado del paìs de la ciudad con menor población(idea)
+#El idioma menos hablado de los paìses de las ciudades con menor población(idea)
 #for country{
 #   if getCity.population()=detMin.city.population(){
 #       print detMax.CountryLanguage.porcentage(country)
@@ -146,19 +146,18 @@ def cons3():
 #}
 
 def cons4():
-    # Subquery to calculate the average population
-    avg_population_subquery = select(func.avg(City.Population)).scalar_subquery()
-    
     # Main query
     query = (
-        select(City.Name, Country.Name.label("Country"), City.Population)  # Retrieve City name, Country name, and Population
-        .join(Country, City.CountryCode == Country.Code)  # Explicit join condition
-        .where(
-            and_(
-                Country.Continent == "Europe",         # Filter for European countries
-                City.Population > avg_population_subquery  # Population greater than the average
-            )
+        select(
+            func.min(CountryLanguage.Percentage).label("languagepercentage"),
+            CountryLanguage.Language.label("countrylanguage"),
+            City.Name.label("city"),
+            Country.Name.label("country"),
+            func.min(City.Population).label("population"),
         )
+        .join(Country, City.CountryCode == Country.Code)
+        .join(CountryLanguage, CountryLanguage.CountryCode == Country.Code)
+        .group_by(City.Name, Country.Name)
     )
     
     # Execute the query
@@ -168,13 +167,16 @@ def cons4():
     # Format the results for HTML rendering
     formatted_results = [
         {
-            "city": row.Name,
-            "country": row.Country,
-            "population": row.Population
+            "languagepercentage": row.languagepercentage,
+            "countrylanguage": row.countrylanguage,
+            "city": row.city,
+            "country": row.country,
+            "population": row.population,
         }
         for row in results
     ]
     return formatted_results
+
 
 #Consulta_5
 #Tipo de gobierno de países africanos con gnp mayor al promedio del continente(idea)
