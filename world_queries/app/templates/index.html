@@ -1,6 +1,53 @@
 {% extends './decorated_base.html' %} 
     {% block datatext %}
     <div class="container-fluid text-center my-5">
-        <h2 class="color1">INICIO</h2>
+        <h2>CONTENIDO</h2>
+        <div class="container">
+            <div class="row my-5">
+                <div class="col  ver-align">
+                    <h5 class="text-uppercase mb-3 color1">Consulta 1</h5>
+                    <p><a class="l-query" href=""><i class="bi bi-link"></i>&emsp;Ciudades europeas donde la población es mayor a la media mundial.</a></p>
+                </div>
+                <div class="col">
+                    <img class="img-fluid rounded" src="{{ url_for('static', filename='images/q1.png') }}" alt="">
+                </div>
+            </div>
+            <div class="row my-5">
+                <div class="col  ver-align">
+                    <h5 class="text-uppercase mb-3 color1">Consulta 2</h5>
+                    <p><a class="l-query" href=""><i class="bi bi-link"></i>&emsp;Gobernante de los países con un lengua hablada por al menos el 50% de la población.</a></p>
+                </div>
+                <div class="col">
+                    <img class="img-fluid rounded" src="{{ url_for('static', filename='images/q2.png') }}" alt="">
+                </div>
+            </div>
+            <div class="row my-5">
+                <div class="col  ver-align">
+                    <h5 class="text-uppercase mb-3 color1">Consulta 3</h5>
+                    <p><a class="l-query" href=""><i class="bi bi-link"></i>&emsp;La capital del país con densidad poblacional mas baja que el promedio (de densidad poblacional) de los paises que tienen GNP mayór al promedio mundial.</a></p>
+                </div>
+                <div class="col">
+                    <img class="img-fluid rounded" src="{{ url_for('static', filename='images/q3.png') }}" alt="">
+                </div>
+            </div>
+            <div class="row my-5">
+                <div class="col  ver-align">
+                    <h5 class="text-uppercase mb-3 color1">Consulta 4</h5>
+                    <p><a class="l-query" href=""><i class="bi bi-link"></i>&emsp;El idioma menos hablado de los países que tienen las ciudades menos pobladas.</a></p>
+                </div>
+                <div class="col">
+                    <img class="img-fluid rounded" src="{{ url_for('static', filename='images/q4.png') }}" alt="">
+                </div>
+            </div>
+            <div class="row my-5">
+                <div class="col  ver-align">
+                    <h5 class="text-uppercase mb-3 color1">Consulta 5</h5>
+                    <p><a class="l-query" href=""><i class="bi bi-link"></i>&emsp;Tipo de gobierno de países Africanos con gnp mayor al promedio del continente.</a></p>
+                </div>
+                <div class="col">
+                    <img class="img-fluid rounded" src="{{ url_for('static', filename='images/q5.png') }}" alt="">
+                </div>
+            </div>
+        </div>
     </div>
     {% endblock %}

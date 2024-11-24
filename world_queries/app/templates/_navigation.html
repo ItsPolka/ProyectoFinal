@@ -14,13 +14,13 @@
             <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#menu">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <a class="navbar-brand px-3 link" href="#">W<i class="bi bi-globe-americas"></i>RLD QUERIES</a>
+            <a class="navbar-brand px-3 link color5" href="{{ url_for('views.index') }}">W<i class="bi bi-globe-americas color5"></i>RLD QUERIES</a>
         </div>
 
       <!-- OFFCANVAS -->
-        <div class="offcanvas offcanvas-start color5" tabindex="-1" id="menu" style="background-color: #5d536b;">
+        <div class="offcanvas offcanvas-start color5" tabindex="-1" id="menu" style="background-color: #728156;">
             <div class="offcanvas-header justify-content-evenly mt-3">
-                <h5>W<i class="bi bi-globe-americas color5"></i>RLD QUERIES</h5>
+                <h5 class="color5">W<i class="bi bi-globe-americas color5"></i>RLD QUERIES</h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
             <hr class="text-white">
@@ -30,20 +30,20 @@
                     <li class="nav-item">
                         <a class="nav-link link" aria-current="page" href="/">Inicio</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link link" href="/about">About</a>
-                    </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Consultas
                         </a>
                         <ul class="dropdown-menu dropdown-menu-dark fs-5">
-                            <li><a class="dropdown-item" href="/1">Consulta 1</a></li>
-                            <li><a class="dropdown-item" href="/2">Consulta 2</a></li>
-                            <li><a class="dropdown-item" href="/3">Consulta 3</a></li>
-                            <li><a class="dropdown-item" href="/4">Consulta 4</a></li>
-                            <li><a class="dropdown-item" href="/5">Consulta 5</a></li>
+                            <li><a class="dropdown-item" href="{{ url_for('views.c1') }}">Consulta 1</a></li>
+                            <li><a class="dropdown-item" href="{{ url_for('views.c2') }}">Consulta 2</a></li>
+                            <li><a class="dropdown-item" href="{{ url_for('views.c3') }}">Consulta 3</a></li>
+                            <li><a class="dropdown-item" href="{{ url_for('views.c4') }}">Consulta 4</a></li>
+                            <li><a class="dropdown-item" href="{{ url_for('views.c5') }}">Consulta 5</a></li>
                         </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link link" href="{{ url_for('views.about') }}">About</a>
                     </li>
                 </ul>
             </div>

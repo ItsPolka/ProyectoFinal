@@ -3,7 +3,7 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 
 global db 
-db= SQLAlchemy()
+db = SQLAlchemy()
 
 
 #Se crea el objeto de la base de datos usando el constructor de SQLAlchemy
