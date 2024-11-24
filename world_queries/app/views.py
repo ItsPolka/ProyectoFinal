@@ -2,7 +2,7 @@
 #Este archivo meneja las rutas de Flask, llamando a funciones de consulta y pasando los resultados a templates.
 from flask import render_template
 from flask import Blueprint,request
-from .queries import cons1,cons2,cons3,cons4,cons5
+from .queries import cons1,cons2,cons3,cons4,cons5,cons6
 
 
 views = Blueprint('views', __name__)
@@ -139,3 +139,24 @@ def c5():
     print(sorted_data)
     # Renderiza el template con datos ordenados
     return render_template('consulta_5.html', results=sorted_data)
+
+# Define la ruta de consulta5
+@views.route('/6')  
+# Decorador para definir la ruta consulta5
+def c6():
+    #Importa datos y los ordena
+    data = cons6()
+    sort_by = request.args.get('sort_by','percentage')
+    sort_order = request.args.get('sort_order', 'desc')
+    reverse = True if sort_order == 'desc' else False
+
+    #Intenta ordenar los datos
+    try:
+        sorted_data = sorted(data, key=lambda x: get_nested_value(x,sort_by), reverse=reverse)
+    except Exception as e:
+        print(f"Error during sorting: {e}")
+        sorted_data = data 
+
+    print(sorted_data)
+    # Renderiza el template con datos ordenados
+    return render_template('consulta_6.html', results=sorted_data)

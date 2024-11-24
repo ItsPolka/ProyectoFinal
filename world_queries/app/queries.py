@@ -211,3 +211,48 @@ def cons5():
         for row in results
     ]
     return formatted_results
+
+#Consulta_6
+#Países donde el idioma con mayor de porcentaje de hablantes sea no oficial.(idea)
+
+def cons6():
+    #Subquery para obtener el idioma con mayor porcentaje de hablantes por país
+    subquery_max_language = (
+    select(
+        CountryLanguage.CountryCode,
+        func.max(CountryLanguage.Percentage).label("max_percentage")
+    )
+    .group_by(CountryLanguage.CountryCode)
+    .subquery()  # Convertirlo en un subquery
+    )
+
+# Query principal para obtener los países donde el idioma con mayor porcentaje es no oficial
+    query = (
+        select(
+            Country.Name.label("country"),
+            CountryLanguage.Language.label("language"),
+            CountryLanguage.Percentage.label("percentage"),
+            CountryLanguage.IsOfficial.label("is_official")  # Obtener el estado oficial
+        )
+        .join(subquery_max_language, 
+            (CountryLanguage.CountryCode == subquery_max_language.c.CountryCode) & 
+            (CountryLanguage.Percentage == subquery_max_language.c.max_percentage))
+        .join(Country, Country.Code == CountryLanguage.CountryCode)
+        .where(CountryLanguage.IsOfficial == "F")  # Filtrar por idioma no oficial (F = False)
+    )
+    
+    # Execute the query
+    with db.session() as session:
+        results = session.execute(query).all()
+
+    # Format the results for HTML rendering
+    formatted_results = [
+        {
+            "country": row.country,
+            "language": row.language,
+            "percentage": row.percentage,
+            "is_official": row.is_official
+        }
+        for row in results
+    ]
+    return formatted_results
