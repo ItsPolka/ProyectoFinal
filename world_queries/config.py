@@ -9,5 +9,3 @@ db = SQLAlchemy()
 #Se crea el objeto de la base de datos usando el constructor de SQLAlchemy
 def init_db(app):
     db.init_app(app)
-    
-    
