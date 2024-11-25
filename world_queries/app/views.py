@@ -50,7 +50,6 @@ def c1():
         print(f"Error during sorting: {e}")
         sorted_data = data 
 
-    #print(sorted_data)
     # Renderiza el template con datos ordenados
     return render_template('consulta_1.html', results=sorted_data)
 
