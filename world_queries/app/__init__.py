@@ -1,7 +1,6 @@
 # Inicializa la aplicación Flask, configura SQLAlchemy y establece las 
 # configuraciones necesarias para conectarse a la base de datos World.
 from flask import Flask, render_template
-from flask_sqlalchemy import SQLAlchemy
 from .views import views
 from config import db
 
