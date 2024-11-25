@@ -15,12 +15,9 @@ def create_app():
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     
     db.init_app(app)
-    
-    
-    # SQLAlchemy(app)
-        # Define el manejador para la página de error 404
+
     @app.errorhandler(404)
-    def pagina_no_encontrada(error):
+    def page_not_found(error):
      # Renderiza el template '404.html' en caso de que la página no sea encontrada
         return render_template('404.html'), 404
     
