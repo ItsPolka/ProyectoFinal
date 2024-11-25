@@ -25,11 +25,11 @@ def about():
 
 # Define a helper to get the nested key value
 def get_nested_value(item, key):
-    keys = key.split('.')  # Handle dot notation for nested keys
+    keys = key.split('.')  # Intepreta notacion con .
     for k in keys:
-        item = item.get(k)  # Navigate to the next level
+        item = item.get(k)  # Navega al siguiente nivel
         if item is None:
-            return None  # Return None if any key is missing
+            return None  # Regresa nad si la llave es nula
     return item
 
 
